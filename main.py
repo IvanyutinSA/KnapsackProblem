@@ -7,3 +7,11 @@ capacity = 4
 
 print(genetic.solve(knapsack, capacity))
 
+knapsack = [
+    (60, 10),
+    (100, 20),
+    (120, 30),
+]
+capacity = 50
+print(genetic.solve(knapsack, capacity))
+

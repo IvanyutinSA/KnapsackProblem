@@ -17,11 +17,11 @@ class Greed:
 
 class Genetic:
     def __init__(self):
-        self.initial_population_size = 100
+        self.initial_population_size = 10
         self.stop = False
         self.k_chromosomes_after_selection = 2 
-        self.k_pairs_of_offsprings = 2
-        self.mutate_chance = .1
+        self.k_pairs_of_offsprings = 1
+        self.mutate_chance = .4
 
     def solve(self, knapsack: list[tuple[int, int]], capacity: int) -> tuple[int, list[tuple[int, int]]]:
         population = self.initialize_population(len(knapsack))
@@ -64,7 +64,7 @@ class Genetic:
         return [chromosome for _, chromosome in pairs[:self.k_chromosomes_after_selection]]
 
     def get_pivot(self, size: int) -> int:
-        return randint(1, size-1)
+        return randint(1, size)
 
     def get_parents(self, population: list[str]) -> list[tuple[str, str]]:
         parents = []

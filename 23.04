@@ -1,0 +1,29 @@
+1. Алгоритм
+Иванютин
+
+2. Тесты рандомные
+Максим 
+
+def TestsRandom() -> tuple[list[int], list[int]]
+Берём алгоритм из интернета (библиотеки)
+Матрицу инициализируем
+np.random(size=(10, 10, 10))
+Решаем своим и библиотченым
+Сравнимаем с точностью
+
+3. Тесты из базы
+Тимофей
+
+def TestsFromLib() -> tuple[list[int], list[int]]
+Где-то в интернете берём тесты
+Решаем
+Сравниваем ответы с точностью
+
+4. Визуализация + Отчёты
+
+def TestsFromLib() -> tuple[list[int], list[int]]
+def TestsRandom() -> tuple[list[int], list[int]]
+x, y = (right_answers, our_answers)
+
+С помощью matplotlib строим графики на основе пунктов 2 и 3
+

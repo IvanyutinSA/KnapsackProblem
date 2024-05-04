@@ -1,0 +1,5 @@
+knapsack, capacity, genetic_result, lib_result = Tests.Random(items=5)
+print("Knapsack:", knapsack)
+print("Capacity:", capacity)
+print("Genetic Result:", genetic_result)
+print("Library Result:", lib_result)

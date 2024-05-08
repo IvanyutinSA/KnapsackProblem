@@ -1,8 +1,9 @@
 from ortools.algorithms.python import knapsack_solver
+from algorithm.genetic import Genetic
 from numpy.random import randint
 
 class Tests:
-    def Random(items: int = 3):
+    def Random(self, items: int = 3):
         genetic = Genetic()
         lib = knapsack_solver.KnapsackSolver(
         knapsack_solver.SolverType.KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,

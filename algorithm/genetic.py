@@ -113,9 +113,13 @@ class Genetic:
         ans_knapsack = []
 
         index = values.index(max(values))
-        for index, gen in enumerate(population[index]):
+        if not values[index]:
+            return 0, []
+
+        for i, gen in enumerate(population[index]):
             if gen:
-                ans_knapsack.append(knapsack[index])
+                ans_knapsack.append(knapsack[i])
+        
 
         return values[index], ans_knapsack
 

@@ -1,4 +1,4 @@
-from random import getrandbits, randint, random
+from random import randint, random
 
 class Greed:
     def __init__(self):
@@ -17,11 +17,11 @@ class Greed:
 
 class Genetic:
     def __init__(self):
-        self.initial_population_size = 10
+        self.initial_population_size = 100
         self.stop = False
-        self.k_chromosomes_after_selection = 2 
-        self.k_pairs_of_offsprings = 1
-        self.mutate_chance = .4
+        self.k_chromosomes_after_selection = 4 
+        self.k_pairs_of_offsprings = 3
+        self.mutate_chance = .02
 
     def solve(self, knapsack: list[tuple[int, int]], capacity: int) -> tuple[int, list[tuple[int, int]]]:
         population = self.initialize_population(len(knapsack))
@@ -32,24 +32,25 @@ class Genetic:
             # Selection
             population = self.select(population, chromosome_values)
             # Crossover
-            population += self.crossover(population)
+            population += [self.mutate(chromosome) for chromosome in self.crossover(population)]
             # Mutation
-            population = [self.mutate(chromosome) for chromosome in population]
+            # population = [self.mutate(chromosome) for chromosome in population]
             # Evaluation
             chromosome_values = [self.evaluate_chromosome_value(knapsack, capacity, chromosome) for chromosome in population]
             # Stop???
-            if 50 < iteration:
+            if 1500 < iteration:
                 self.stop = True
             iteration += 1
 
         return self.extract_best(knapsack, population, chromosome_values)
 
     def initialize_population(self, size: int) -> list[str]:
-        return [bin(getrandbits(size))[2:] for _ in range(self.initial_population_size)]
+        return [self.mutate('0'*size) for _ in range(self.initial_population_size)]
 
     def evaluate_chromosome_value(self, knapsack: list[tuple[int, int]], capacity: int, chromosome: str) -> int:
         total_value = 0
         for gen, item in zip(chromosome, knapsack):
+            gen = False if gen == '0' else True
             value, weight = item
             if gen:
                 total_value += value
@@ -94,16 +95,11 @@ class Genetic:
         total = []
         # I'm done
         for gen in chromosome:
-            gen = False if gen == '0' else True
             mut = random() < self.mutate_chance
-            if not mut and not gen:
-                total_gen = '0'
-            elif not mut and gen:
-                total_gen = '1'
-            elif mut and not gen:
-                total_gen = '1'
+            if not mut:
+                total_gen = gen
             else:
-                total_gen = '0'
+                total_gen = '0' if gen == '1' else '1'
 
             total.append(total_gen)
         
@@ -117,6 +113,7 @@ class Genetic:
             return 0, []
 
         for i, gen in enumerate(population[index]):
+            gen = False if gen == '0' else True
             if gen:
                 ans_knapsack.append(knapsack[i])
         

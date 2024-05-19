@@ -73,20 +73,19 @@ class Tests:
         genetic_values = []
         lib_values = []
     
+        genetic = self.alg
+        lib = knapsack_solver.KnapsackSolver(
+        knapsack_solver.SolverType.KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,
+        "KnapsackExample",
+        )
+        lib.init(values, [weights], [capacity])
+        lib_value = lib.solve()
         for _ in range(attempts):
-            genetic = self.alg
-            lib = knapsack_solver.KnapsackSolver(
-            knapsack_solver.SolverType.KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,
-            "KnapsackExample",
-            )
-            genetic_value += genetic.solve(knapsack, capacity)[0]
-            lib.init(values, [weights], [capacity])
-            lib_value += lib.solve()
+            genetic_value = genetic.solve(knapsack, capacity)[0]
             genetic_values.append(genetic_value)
             lib_values.append(lib_value)
     
         return genetic_values, lib_values
-
 
     # Fixed
     def RandomMultipleCases(self, items: int = 3, cases: int = 1) -> tuple[list[int], list[int]]:
@@ -98,3 +97,14 @@ class Tests:
             lib_results.append(lib_value)
             
         return genetic_results, lib_results
+
+    def RandomMultiple(self, items: int = 3, cases: int = 1, attempts: int = 1):
+        genetic_results = []
+        lib_results = []
+        for _ in range(cases):
+            genetic_attempt_results, lib_attempt_results = self.RandomMultipleAttempts(items=items, attempts=attempts)
+            genetic_results.extend(genetic_attempt_results)
+            lib_results.extend(lib_attempt_results)
+        return genetic_results, lib_results
+
+

@@ -8,24 +8,26 @@ from ortools.algorithms.python import knapsack_solver
 
 # Adjusted
 def lib_tests(alg: Genetic = Genetic()):
-    n = 4
+    n = 9
     genetic_results = []
     lib_results = []
+    answers = []
     for i in range(1, n+1):
         with open(f"test_cases/Input{i}.txt") as f:
             dim, capacity = map(int, f.readline().split())
             values = []
             weights = []
-            for i in range(dim):
+            for _ in range(dim):
                 v, w = map(int, f.readline().split())
                 values.append(v)
                 weights.append(w)
-
             genetic_result, lib_result = help_function(capacity, values, weights, alg=alg)
             genetic_results.append(genetic_result)
             lib_results.append(lib_result)
-    return genetic_results, lib_results
+        with open(f"test_cases/Output{i}.txt") as f:
+            answers.append(int(f.readline().strip()))
 
+    return genetic_results, lib_results, answers
 
             
     

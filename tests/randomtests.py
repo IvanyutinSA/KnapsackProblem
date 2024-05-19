@@ -9,10 +9,13 @@ import os.path
 
 
 class Tests:
-    def __init__(self, test_number):
+    def __init__(self, test_number: int = -1, alg: Genetic = Genetic()):
               self.test_number = test_number
-    def Random(self, items: int = 3):
-        genetic = Genetic()
+              self.alg = alg
+
+    # Fixed
+    def Random(self, items: int = 3) -> tuple[int, int]:
+        genetic = self.alg
         lib = knapsack_solver.KnapsackSolver(
         knapsack_solver.SolverType.KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,
         "KnapsackExample",
@@ -32,44 +35,46 @@ class Tests:
             self.test_number += 1
         file_filling(f"rand_tests/Input{self.test_number}.txt")
 
-        genetic_result = genetic.solve(knapsack, capacity)
+        genetic_result = genetic.solve(knapsack, capacity)[0]
 
         lib.init(values, [weights], [capacity])
         lib_value = lib.solve()
-        packed_items = [knapsack[i] for i in range(len(values)) if lib.best_solution_contains(i)]
-        lib_result = lib_value, packed_items
-        
-        
+        # packed_items = [knapsack[i] for i in range(len(values)) if lib.best_solution_contains(i)]
+        lib_result = lib_value
 
-        return knapsack, capacity, genetic_result, lib_result
+        return genetic_result, lib_result
     
-    def Library(capacity: int, values: list, weights: list):
-        genetic = Genetic()
-        lib = knapsack_solver.KnapsackSolver(
-        knapsack_solver.SolverType.KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,
-        "KnapsackExample",
-        )
+    # I don't know for what this's for
+    # def Library(self, capacity: int, values: list, weights: list) -> tuple[int, int]:
+    #     genetic = self.alg
+    #     lib = knapsack_solver.KnapsackSolver(
+    #     knapsack_solver.SolverType.KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,
+    #     "KnapsackExample",
+    #     )
+    #
+    #     knapsack = list(zip(values, weights))
+    #     
+    #     genetic_result = genetic.solve(knapsack, capacity)[0]
+    #     
+    #     lib.init(values, [weights], [capacity])
+    #     lib_value = lib.solve()
+    #     # packed_items = [knapsack[i] for i in range(len(values)) if lib.best_solution_contains(i)]
+    #     lib_result = lib_value
+    #
+    #     return genetic_result, lib_result
 
-        knapsack = list(zip(values, weights))
-        
-        genetic_result = genetic.solve(knapsack, capacity)
-        
-        lib.init(values, [weights], [capacity])
-        lib_value = lib.solve()
-        packed_items = [knapsack[i] for i in range(len(values)) if lib.best_solution_contains(i)]
-        lib_result = lib_value, packed_items
-
-        return knapsack, capacity, genetic_result, lib_result
-
-    def RandomMultipleAttempts(items: int = 3, attempts: int = 1) -> int:
+    # Fixed
+    def RandomMultipleAttempts(self, items: int = 3, attempts: int = 1) -> tuple[list[int], list[int]]:
         values, weights = randint(low=1, high=100, size=(2, items))
         capacity = randint(low=min(weights), high=sum(weights))
         knapsack = list(zip(values, weights))
         genetic_value = 0
         lib_value = 0
+        genetic_values = []
+        lib_values = []
     
-        for k in range(attempts):
-            genetic = Genetic()
+        for _ in range(attempts):
+            genetic = self.alg
             lib = knapsack_solver.KnapsackSolver(
             knapsack_solver.SolverType.KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,
             "KnapsackExample",
@@ -77,16 +82,19 @@ class Tests:
             genetic_value += genetic.solve(knapsack, capacity)[0]
             lib.init(values, [weights], [capacity])
             lib_value += lib.solve()
+            genetic_values.append(genetic_value)
+            lib_values.append(lib_value)
     
-        return knapsack, capacity, genetic_value, lib_value
+        return genetic_values, lib_values
 
 
-    def RandomMultipleCases(items: int = 3, cases: int = 1):
+    # Fixed
+    def RandomMultipleCases(self, items: int = 3, cases: int = 1) -> tuple[list[int], list[int]]:
         genetic_results = []
         lib_results = []
         for _ in range(cases):
-            result = Tests.Random(items)
-            genetic_results.append(result[2][0])
-            lib_results.append(result[3][0])
+            genetic_value, lib_value = self.Random(items)
+            genetic_results.append(genetic_value)
+            lib_results.append(lib_value)
             
         return genetic_results, lib_results

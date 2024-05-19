@@ -42,3 +42,14 @@ class Tests:
             lib_value += lib.solve()
     
         return knapsack, capacity, genetic_value, lib_value
+
+
+    def RandomMultipleCases(items: int = 3, cases: int = 1):
+        genetic_results = []
+        lib_results = []
+        for _ in range(cases):
+            result = Tests.Random(items)
+            genetic_results.append(result[2][0])
+            lib_results.append(result[3][0])
+            
+        return genetic_results, lib_results

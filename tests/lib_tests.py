@@ -16,7 +16,6 @@ def lib_tests():
                 weights.append(w)
 
             knapsack, capacity, genetic_result, lib_result = Tests.Library(capacity, values, weights)
-            print("Knapsack:", knapsack)
-            print("Capacity:", capacity)
-            print("Genetic Result:", genetic_result)
-            print("Library Result:", lib_result)
+
+            return knapsack, capacity, genetic_result, lib_result 
+            

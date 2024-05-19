@@ -9,7 +9,8 @@ import os.path
 
 
 class Tests:
-    test_number = 1
+    def __init__(self, test_number):
+              self.test_number = test_number
     def Random(self, items: int = 3):
         genetic = Genetic()
         lib = knapsack_solver.KnapsackSolver(
@@ -20,15 +21,16 @@ class Tests:
         values, weights = randint(low=1, high=100, size=(2, items))
         capacity = randint(low=min(weights), high=sum(weights))
         knapsack = list(zip(values, weights))
+
         def file_filling(path):
-                        with open(path, 'a') as f:
+                    with open(path, 'a') as f:
                                 f.write(f"{len(values)} {capacity}\n")
                                 for i in range(len(values)):
                                     f.write(f"{values[i]} {weights[i]}\n")
 
-        if os.path.isfile(f"rand_tests/Input{Tests.test_number}.txt"):
-            Tests.test_number += 1
-        file_filling(f"rand_tests/Input{Tests.test_number}.txt")
+        if os.path.isfile(f"rand_tests/Input{self.test_number}.txt"):
+            self.test_number += 1
+        file_filling(f"rand_tests/Input{self.test_number}.txt")
 
         genetic_result = genetic.solve(knapsack, capacity)
 

@@ -131,7 +131,8 @@ def visual():
         ]
     ]
     capacities = [50, 20, 50, 33, 45]
-    see.Grafik(knapsacks, capacities)
+    otvet= [220, 150 , 44, 44, 178]
+    see.Grafik(knapsacks, capacities, otvet)
 
     see.RandomTest_Grafik(20)
 

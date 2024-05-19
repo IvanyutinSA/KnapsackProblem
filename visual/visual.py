@@ -1,8 +1,28 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from algorithm.genetic import Genetic
 from tests.randomtests import Tests
 
 class Visual:  
+    def ResultPlot(self, y_hat, y):
+        plt.figure(figsize=(10, 5))
+        indexes = np.array(range(1, len(y)+1))
+        plt.plot(indexes, y_hat, marker='o', color='red', label='gen')
+        plt.plot(indexes, y, marker='o', color='green', label='lib')
+        plt.ylabel('Value')
+        plt.xlabel('Number')
+        plt.title('ResultPlot')
+        plt.show()
+
+    def MatchPlot(self, y_hat, y):
+        plt.figure(figsize=(10, 5))
+        indexes = list(range(1, len(y)+1))
+        plt.plot(indexes, np.array(y_hat)/np.array(y)*100, marker='o', color='red')
+        plt.ylabel('Percent')
+        plt.xlabel('Number')
+        plt.title('MatchPlot')
+        plt.show()
+
     def Grafik(self, knapsacks, capacities):
         plt.figure(figsize=(10, 5))
         indexs=range(1, len(knapsacks)+1)
@@ -15,7 +35,6 @@ class Visual:
         plt.ylabel('Стоймость взятых вещей')
         plt.xlabel('Номер рюкзака')
         plt.show()
-        print()
     
     def Sovpadenia(self, genetic_results, lib_results):
         nomer=1

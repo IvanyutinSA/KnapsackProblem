@@ -1,16 +1,11 @@
 from ortools.algorithms.python import knapsack_solver
 from algorithm.genetic import Genetic
 from numpy.random import randint
-
 import os.path 
-# import sys
-# if os.path.dirname(os.path.dirname(os.path.realpath(__file__))) not in sys.path:
-#       sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 
 class Tests:
-    def __init__(self, test_number):
-              self.test_number = test_number
+
     def Random(self, items: int = 3):
         genetic = Genetic()
         lib = knapsack_solver.KnapsackSolver(
@@ -23,14 +18,16 @@ class Tests:
         knapsack = list(zip(values, weights))
 
         def file_filling(path):
-                    with open(path, 'a') as f:
+            with open(path, 'a') as f:
                                 f.write(f"{len(values)} {capacity}\n")
                                 for i in range(len(values)):
                                     f.write(f"{values[i]} {weights[i]}\n")
 
-        if os.path.isfile(f"rand_tests/Input{self.test_number}.txt"):
-            self.test_number += 1
-        file_filling(f"rand_tests/Input{self.test_number}.txt")
+        
+        max_test_number = max([index for index in range(1, 100) if os.path.isfile(f"rand_tests/Input{index}.txt")], default=0)
+        test_number = max_test_number + 1
+
+        file_filling(f"rand_tests/Input{test_number}.txt")
 
         genetic_result = genetic.solve(knapsack, capacity)
 

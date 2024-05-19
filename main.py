@@ -63,8 +63,8 @@ def main():
         print()
 
 
-def rand_tests(test_number):
-    t = Tests(test_number);
+def rand_tests():
+    t = Tests();
     knapsack, capacity, genetic_result, lib_result = t.Random(items=500)
     print("Knapsack:", knapsack)
     print("Capacity:", capacity)
@@ -73,9 +73,9 @@ def rand_tests(test_number):
 
 
 if __name__ == '__main__':
-    test_number = 5
+
     main();
-    rand_tests(test_number);
+    rand_tests();
 
     knapsack, capacity, genetic_result, lib_result = lib_tests()
 

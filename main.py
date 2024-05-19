@@ -1,5 +1,6 @@
 from algorithm.genetic import Genetic
 from tests.randomtests import Tests
+from tests.lib_tests import lib_tests
 
 def test(knapsack, capacity):
     genetic = Genetic()
@@ -74,4 +75,8 @@ def rand_tests():
 if __name__ == '__main__':
     main();
     rand_tests();
+
+    lib_tests()
+
+
 

@@ -1,5 +1,6 @@
 from algorithm.genetic import Genetic
 from tests.randomtests import Tests
+from tests.lib_tests import lib_tests
 from visual.visual import Visual
 
 def test(knapsack, capacity):
@@ -63,8 +64,8 @@ def main():
         print()
 
 
-def rand_tests():
-    t = Tests();
+def rand_tests(test_number):
+    t = Tests(test_number);
     knapsack, capacity, genetic_result, lib_result = t.Random(items=500)
     print("Knapsack:", knapsack)
     print("Capacity:", capacity)
@@ -137,6 +138,6 @@ def visual():
 
 
 if __name__ == '__main__':
+    test_number = 5
     main();
     rand_tests();
-    visual();

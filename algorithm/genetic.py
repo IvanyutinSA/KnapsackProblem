@@ -24,6 +24,7 @@ class Genetic:
         self.mutate_chance = .02
 
     def solve(self, knapsack: list[tuple[int, int]], capacity: int) -> tuple[int, list[tuple[int, int]]]:
+        self.stop = False
         population = self.initialize_population(len(knapsack))
         chromosome_values = [self.evaluate_chromosome_value(knapsack, capacity, chromosome) for chromosome in population]
 

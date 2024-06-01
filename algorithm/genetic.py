@@ -29,7 +29,7 @@ class Genetic:
         population = self.initialize_population(len(knapsack))
         chromosome_values = [self.evaluate_chromosome_value(knapsack, capacity, chromosome) for chromosome in population]
 
-        iteration = 0
+        iteration = 1
         while not self.stop:
             # Selection
             population = self.select(population, chromosome_values)
@@ -40,7 +40,7 @@ class Genetic:
             # Evaluation
             chromosome_values = [self.evaluate_chromosome_value(knapsack, capacity, chromosome) for chromosome in population]
             # Stop???
-            if 1500 < self.maximum_iterations:
+            if iteration >= self.maximum_iterations:
                 self.stop = True
             iteration += 1
 

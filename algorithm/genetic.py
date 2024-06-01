@@ -16,8 +16,8 @@ class Greed:
 
 
 class Genetic:
-    def __init__(self):
-        self.maximum_iterations = 100
+    def __init__(self, maximum_iterations = 100):
+        self.maximum_iterations = maximum_iterations
         self.initial_population_size = 100
         self.stop = False
         self.k_chromosomes_after_selection = 4 

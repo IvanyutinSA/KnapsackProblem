@@ -94,7 +94,8 @@ class Tests:
             gentime_b = datetime.datetime.now().microsecond
             genetic_value = genetic.solve(knapsack, capacity)[0]
             gentime_e = datetime.datetime.now().microsecond
-            gen_times.append(gentime_e - gentime_b)
+            gen_time = gentime_e - gentime_b
+            gen_times.append(gen_time)
             genetic_values.append(genetic_value)
             lib_values.append(lib_value)
     

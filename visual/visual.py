@@ -7,20 +7,22 @@ class Visual:
     def ResultPlot(self, y_hat, y):
         plt.figure(figsize=(10, 5))
         indexes = np.array(range(1, len(y)+1))
-        plt.plot(indexes, y_hat, marker='o', color='red', label='gen')
-        plt.plot(indexes, y, marker='o', color='green', label='lib')
+        plt.plot(indexes, y_hat, marker='o', color='#136970', label='реализованный')
+        plt.plot(indexes, y, marker='o', color='green', label='библиотечный')
         plt.ylabel('Значения')
-        plt.xlabel('Номер задачи')
-        plt.title('График значений')
+        plt.xlabel('Номер попытки') 
+        plt.title('Сравнение результатов')
+        
+        plt.legend()
         plt.show()
 
     def MatchPlot(self, y_hat, y):
         plt.figure(figsize=(10, 5))
         indexes = list(range(1, len(y)+1))
-        plt.plot(indexes, np.array(y_hat)/np.array(y)*100, marker='o', color='red')
+        plt.plot(indexes, np.array(y_hat)/np.array(y)*100, marker='o', color='green')
         plt.ylabel('Процент совпадения')
-        plt.xlabel('Номер задачи')
-        plt.title('График процентов совпадения')
+        plt.xlabel('Номер попытки')
+        plt.title('Сравнение в соотношении')
         plt.show()
 
     def Grafik(self, knapsacks, capacities):
@@ -31,7 +33,7 @@ class Visual:
             genetic = Genetic()
             alg_res.append(  genetic.solve(knapsack, capacity)[0] )
             # print( alg_res[-1] )
-        plt.plot(indexs, alg_res, marker='o', color='red')
+        plt.plot(indexs, alg_res, marker='o', color='#136970')
         plt.ylabel('Стоймость взятых вещей')
         plt.xlabel('Номер рюкзака')
         plt.show()
@@ -77,11 +79,14 @@ class Visual:
     def Time_Grafik(self, genetic_time, lib_time):
         plt.figure(figsize=(10, 5))
         indexes = np.array(range(1, len(lib_time)+1))
-        plt.plot(indexes, genetic_time, marker='o', color='red', label='gen')
-        plt.plot(indexes, lib_time, marker='o', color='green', label='lib')
-        plt.ylabel('Кол-во времени')
-        plt.xlabel('Номер задачи')
-        plt.title('График времени выполнения')
+        genetic_time = [round(np.mean([g for g in genetic_time if g > 0])) if g < 0 else g for g in genetic_time ]
+        plt.plot(indexes, genetic_time, marker='o', color='#136970', label='реализованный')
+        plt.plot(indexes, lib_time, marker='o', color='green', label='библиотечный')
+        plt.ylabel('Время (мкс)')
+        plt.xlabel('Номер попытки')
+        plt.title('Время выполнения')
+        plt.legend()
+
         plt.show()
     
     def Time_Grafik_Math(self, genetic_time, lib_time):
@@ -95,7 +100,7 @@ class Visual:
             all_time_lib+=value[1]
             time_procent= min(value)/max(value)*100
             times_procent.append(time_procent)
-        plt.plot(indexes, times_procent, marker='o', color='red')
+        plt.plot(indexes, times_procent, marker='o', color='#136970')
         plt.ylabel('Процент разницы')
         plt.xlabel('Номер задачи')
         plt.title('График процента разницы в выполнении')

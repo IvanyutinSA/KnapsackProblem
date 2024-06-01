@@ -68,7 +68,7 @@ class Visual:
         # вывод графика
         plt.plot(rand_indexs, genetic_results, marker='o', label="genetic_results" ,color='blue')
         plt.plot(rand_indexs, lib_results, marker='o', linestyle='--' ,label="lib_results" ,color='green')
-        plt.ylabel('Стоймость взятых вещей')
+        plt.ylabel('Стоимость взятых вещей')
         plt.xlabel('Количество вещей в рюкзаке')
         plt.legend()
         plt.show()
@@ -98,7 +98,7 @@ class Visual:
         plt.plot(indexes, times_procent, marker='o', color='red')
         plt.ylabel('Процент разницы')
         plt.xlabel('Номер задачи')
-        plt.title('График процента разницы в выпонении')
+        plt.title('График процента разницы в выполнении')
         plt.show()
         #круговая диаграмма
         plt.pie([all_time_gen, all_time_lib],

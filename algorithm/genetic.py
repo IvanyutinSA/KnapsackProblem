@@ -17,6 +17,7 @@ class Greed:
 
 class Genetic:
     def __init__(self):
+        self.maximum_iterations = 100
         self.initial_population_size = 100
         self.stop = False
         self.k_chromosomes_after_selection = 4 
@@ -39,7 +40,7 @@ class Genetic:
             # Evaluation
             chromosome_values = [self.evaluate_chromosome_value(knapsack, capacity, chromosome) for chromosome in population]
             # Stop???
-            if 1500 < iteration:
+            if 1500 < self.maximum_iterations:
                 self.stop = True
             iteration += 1
 

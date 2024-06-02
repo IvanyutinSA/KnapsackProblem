@@ -34,16 +34,16 @@ class Tests:
         if os.path.isfile(f"rand_tests/Input{self.test_number}.txt"):
             self.test_number += 1
         files_filling(f"rand_tests/Input{self.test_number}.txt")
-        gentime_b = datetime.datetime.now().microsecond
+        gentime_b = datetime.datetime.now()
         genetic_result = genetic.solve(knapsack, capacity)[0]
-        gentime_e = datetime.datetime.now().microsecond
-        gen_time = gentime_e - gentime_b
+        gentime_e = datetime.datetime.now()
+        gen_time = int((gentime_e - gentime_b).total_seconds() * 1000000)
         
         lib.init(values, [weights], [capacity])
-        libtime_b = datetime.datetime.now().microsecond
+        libtime_b = datetime.datetime.now()
         lib_value = lib.solve()
-        libtime_e = datetime.datetime.now().microsecond
-        lib_time = libtime_e - libtime_b
+        libtime_e = datetime.datetime.now()
+        lib_time = int((libtime_e - libtime_b).total_seconds() * 1000000)
 
         # packed_items = [knapsack[i] for i in range(len(values)) if lib.best_solution_contains(i)]
         lib_result = lib_value
@@ -85,16 +85,16 @@ class Tests:
         "KnapsackExample",
         )
         lib.init(values, [weights], [capacity])
-        libtime_b = datetime.datetime.now().microsecond
+        libtime_b = datetime.datetime.now()
         lib_value = lib.solve()
-        libtime_e = datetime.datetime.now().microsecond
-        lib_time = libtime_e - libtime_b
+        libtime_e = datetime.datetime.now()
+        lib_time = int((libtime_e - libtime_b).total_seconds() * 1000000)
         gen_times = []
         for _ in range(attempts):
-            gentime_b = datetime.datetime.now().microsecond
+            gentime_b = datetime.datetime.now()
             genetic_value = genetic.solve(knapsack, capacity)[0]
-            gentime_e = datetime.datetime.now().microsecond
-            gen_time = gentime_e - gentime_b
+            gentime_e = datetime.datetime.now()
+            gen_time = int((gentime_e - gentime_b).total_seconds() * 1000000)
             gen_times.append(gen_time)
             genetic_values.append(genetic_value)
             lib_values.append(lib_value)
